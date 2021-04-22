@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Apply_Study_Group'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/group/study_group_form.css}">
+</th:block>
+
+<th:block layout:fragment="js">
+    <script type="text/javascript" th:src="@{/js/group/apply.js}"></script>
+</th:block>
+
+<div layout:fragment="content">
+    <div th:class="container">
+        <div class="py-4 text-center">
+            <h2>스터디 신청하기</h2>
+            <p class="lead">신청서를 작성하고 제출 버튼을 클릭해주세요</p>
+        </div>
+
+        <form th:action="@{/apply_studygroup}" th:object="${studyGroupApplicationForm}" method="post" id="apply-form" name="applyForm">
+
+            <div id="consent-form">
+                <h4>스터디 안내사항</h4>
+                <hr/>
+                <ol>
+                    <li>신청한 조건에 맞춘 4인 스터디그룹이 매칭됩니다.</li>
+                    <li>스터디그룹 매칭은 매일 새벽 4시에 진행됩니다.</li>
+                    <li>한번에 한 개의 스터디 신청서만 제출 할 수 있으며, 한 개 이상의 스터디를 신청한 경우 기존의 신청서에 덮어 씌워집니다.</li>
+                    <li>초기 조장은 임의로 배정되며 추후 수정할 수 있습니다.</li>
+                </ol>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" th:field="*{agreement}" th:value="true" class="form-check-input" id="agreement" name="agreement">
+                <label class="form-check-label" for="agreement">동의합니다.</label>
+            </div>
+            <hr class="my-2">
+            <br/>
+            <div class="component">
+                <h4>희망연령(복수응답가능)</h4>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                    <input type="checkbox" name="tag" th:field="*{tags}" th:value="${T(toeicLab.toeicLab.domain.StudyGroupApplicationTag).AGE_10S}">
+                    <label>10대</label>
+                </div>
+                <div class="col-1">
+                    <input type="checkbox" name="tag" th:field="*{tags}" th:value="${T(toeicLab.toeicLab.domain.StudyGroupApplicationTag).AGE_20S}">
+                    <label>20대</label>
+                </div>
+                <div class="col-1">
+                    <input type="checkbox" name="tag" th:field="*{tags}" th:value="${T(toeicLab.toeicLab.domain.StudyGroupApplicationTag).AGE_30S}">
+                    <label>30대</label>
+                </div>
+            </div>
+
+            <hr class="my-2">
+            <br/>
+            <div class="component">
+                <h4>희망레벨(복수응답가능)</h4>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                    <input type="checkbox" name="tag" th:field="*{tags}" th:value="${T(toeicLab.toeicLab.domain.StudyGroupApplicationTag).LEVEL_ADVANCED}">
+                    <label>상</label>
+                </div>
+                <div class="col-1">
+                    <input type="checkbox" name="tag" th:field="*{tags}" th:value="${T(toeicLab.toeicLab.domain.StudyGroupApplicationTag).LEVEL_INTERMEDIATE}">
+                    <label>중</label>
+                </div>
+                <div class="col-1">
+                    <input type="checkbox" name="tag" th:field="*{tags}" th:value="${T(toeicLab.toeicLab.domain.StudyGroupApplicationTag).LEVEL_BEGINNER}">
+                    <label>하</label>
+                </div>
+            </div>
+            <hr class="my-2">
+            <br/>
+            <div class="component">
+                <h4>스터디 희망 요일(복수응답가능)</h4>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                    <input type="checkbox" name="tag" th:field="*{tags}" th:value="${T(toeicLab.toeicLab.domain.StudyGroupApplicationTag).WEEKDAY}">
+                    <label>주중</label>
+                </div>
+                <div class="col-1">
+                    <input type="checkbox" name="tag" th:field="*{tags}" th:value="${T(toeicLab.toeicLab.domain.StudyGroupApplicationTag).WEEKEND}">
+                    <label>주말</label>
+                </div>
+            </div>
+            <hr class="my-2">
+            <br/>
+            <div class="component">
+                <h4>희망성별(복수응답가능)</h4>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                    <input type="checkbox" name="tag" th:field="*{tags}" th:value="${T(toeicLab.toeicLab.domain.StudyGroupApplicationTag).MALE}">
+                    <label>남</label>
+                </div>
+                <div class="col-1">
+                    <input type="checkbox" name="tag" th:field="*{tags}" th:value="${T(toeicLab.toeicLab.domain.StudyGroupApplicationTag).FEMALE}">
+                    <label>여</label>
+                </div>
+            </div>
+            <br/>
+            <button type="button" id="apply-button" class="w-100 btn btn-dark btn-lg">신청서 제출하기</button>
+
+        </form>
+    </div>
+    <br>
+
+    <div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">토익연구소 :: 에러 발생!!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</html>

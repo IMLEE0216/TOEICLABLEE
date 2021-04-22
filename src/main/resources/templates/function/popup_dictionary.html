@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>토익연구소 크롤링 사전</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link th:href="@{/css/dictionary/dictionary.css}" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/function/dictionary.js}"></script>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<body>
+    <div>
+        <label th:for="inputWord">검색할 단어</label><br/>
+        <div class="row">
+            <div class="col-1"></div>
+            <input type="text" th:id="inputWord" class="form-control col-8" th:name="word">
+            <button type="button" id="find" class="col-2 btn btn-dark">검색</button>
+            <div class="col-1"></div>
+        </div>
+    </div>
+    <div>
+        <label for="word">영어 단어</label>
+        <div class="row">
+            <div class="col-1"></div>
+            <input name="word"  type="text" id="word" value="" class="form-control col-10" readonly>
+            <div class="col-1"></div>
+        </div>
+        <label for="meaning">단어 뜻</label>
+        <div class="row">
+            <div class="col-1"></div>
+            <input name="mean"  type="text" id="meaning" value="" class="form-control col-10" readonly>
+            <div class="col-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10" id="add-word">
+                <button id="add_word_list" type="button" class="btn btn-warning">단어장 추가</button>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+
+
+    <!--------------------------------Modal------------------------------------>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">토익연구소 크롤링 사전</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

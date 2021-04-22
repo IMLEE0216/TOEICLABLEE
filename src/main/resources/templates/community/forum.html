@@ -1,0 +1,62 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Forum'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/community/community.css}">
+</th:block>
+
+<div layout:fragment="content">
+    <div class="container">
+        <div class="py-5">
+            <div class="banner">
+                <h5>새로운 문제를 등록하여 저희 커뮤니티를 발전 시키세요!</h5>
+            </div>
+            <div id="upload-btn">
+                <button class="btn"><a th:href="@{/forum_upload}" class="btn btn-dark">문제사진 올리기</a></button>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr class="row" id="list-row">
+                    <td class="col-1">번호</td>
+                    <td class="col-7">제목</td>
+                    <td class="col-1">작성자</td>
+                    <td class="col-2">날짜</td>
+                    <td class="col-1">조회수</td>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr id="forum_list" th:each="forum : ${forumList}" class="row">
+                    <th id="number" th:text="${forumStat.index + 1}" class="col-1"></th>
+                    <td id="title" class="col-7"><a th:href="@{/forumDetail/{id}(id=${forum.id})}" th:text="${forum.getTitle}" ></a></td>
+                    <td id="nickname" th:text="${forum.getNickname()}" class="col-1"></td>
+                    <td id="date" th:text="${forum.getDate()}" class="col-2"></td>
+                    <td id="hit" th:text="${forum.getHit()}" class="col-1"></td>
+<!--                    <td> <a th:href="@{/forumDetail/{id}(id=${forum.id})}" class="btn btn-outline-primary btn-sm">상세 보기</a></td>-->
+                </tr>
+
+                </tbody>
+            </table>
+            <hr id="line-forum"/>
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item"><a class="page-link" th:href="@{/forum?page=1}" aria-label="Previous"><span aria-hidden="true">처음</span></a></li>
+                    <li class="page-item"> <a class="page-link" th:href="@{/forum?page={page} (page = ${pagination.prevBlock})}" aria-label="Previous"><span aria-hidden="true">이전</span></a></li>
+
+                    <th:block  th:with="start = ${pagination.startPage}, end = ${pagination.endPage}">
+                        <li class="page-item"
+                            th:with="start = ${pagination.startPage}, end = ${pagination.endPage}"
+                            th:each="pageButton : ${#numbers.sequence(start, end)}">
+                            <a class="page-link active" th:href="@{/forum?page={page} (page = ${pageButton})}" th:text=${pageButton}></a>
+                        </li>
+                    </th:block>
+                    <li class="page-item"><a class="page-link" th:href="@{/forum?page={page} (page = ${pagination.nextBlock})}" aria-label="Next"><span aria-hidden="true">다음</span></a></li>
+                    <li class="page-item"><a class="page-link" th:href="@{/forum?page={page} (page = ${pagination.totalPageCnt})}" aria-label="Previous"><span aria-hidden="true">끝</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+</html>

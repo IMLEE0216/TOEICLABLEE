@@ -1,0 +1,122 @@
+.banner, .pagination {
+    font-family: "Gugi", sans-serif;
+}
+
+thead {
+    font-family: "Gugi", sans-serif;
+    text-align: center;
+}
+
+#upload-btn {
+    text-align: right;
+    font-family: "Gugi", sans-serif;
+}
+
+#forum_list, #bulletin-list {
+    font-family: "Hi Melody", sans-serif;
+    margin-left: 0.063em;
+    margin-right: 0.625em;
+}
+
+#list-row {
+    margin-left: 0.063em;
+    margin-right: 0.625em;
+}
+textarea {
+    min-height: 10em;
+}
+
+
+#file_form {
+    width: 85%;
+}
+
+#readText {
+    width: 10%;
+    font-family: "Gugi", sans-serif;
+}
+
+#empty {
+    width: 3%;
+}
+
+#upload-submit {
+    text-align: right;
+    font-family: "Gugi", sans-serif;
+}
+
+#back-list {
+    text-align: right;
+    font-family: "Gugi", sans-serif;
+    margin-right: 3.125em;
+}
+
+#date, #hit, #number, #nickname, #get-like {
+    text-align: center;
+}
+
+#bulletin-title, #bulletin-content {
+    font-family: "Gugi", sans-serif;
+}
+
+.detail-btn {
+    text-align: end;
+}
+
+#detail-content {
+    height: 18.750em;
+    background-color: aliceblue;
+}
+
+#detail-title {
+    background-color: aliceblue;
+}
+
+.sub {
+    font-family: "Gugi", sans-serif;
+    margin-left: 0.313em;
+}
+
+.comment-form {
+    width: 86%;
+    height: 7.500em;
+}
+.space {
+    width: 3.5%;
+}
+.submit_comment {
+    height: 2.500em;
+    margin-top: 5.000em;
+    width: 6.250em;
+}
+
+.custom-file {
+    margin-left: 0.063em;
+}
+
+#detail-div {
+    padding-left: 3.125em;
+    padding-right: 3.125em;
+}
+
+#line-detail {
+    width: 90%;
+}
+
+#line-forum, #line-bulletin {
+    margin-right: 0.625em;
+}
+
+#thead-row, #line-bulletin-detail{
+    margin-left: 0.125em;
+    margin-right: 0.625em;
+}
+
+#upload-comment {
+    margin-left: 0.125em;
+    margin-right: -0.375em;
+}
+
+#output-text {
+    margin-left: 0px;
+}
