@@ -263,6 +263,21 @@ public class ServiceConfiguration {
         return paragraph.toString();
     }
 
+
+    public void SpeakingPart1() throws IOException{
+        SPK spk = new SPK();
+        spk.setQuestionType(QuestionType.SPK_PART1);
+        spk.setImage("spk-part1.png");
+        spk.setRecording("spk_part1.mp3");
+    }
+
+    public void SpeakingPart2() throws IOException{
+        SPK spk = new SPK();
+        spk.setQuestionType(QuestionType.SPK_PART2);
+        spk.setImage("spk-part2.png");
+        spk.setRecording("spk_part2.mp3");
+    }
+
     /**
      * TestUser를 생성합니다.
      */
@@ -295,6 +310,8 @@ public class ServiceConfiguration {
         initPart6();
         initPart7_single();
         initPart7_multiple();
+        SpeakingPart1();
+        SpeakingPart2();
     }
 
     /**

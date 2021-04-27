@@ -225,6 +225,20 @@ public class DevConfiguration {
         return paragraph.toString();
     }
 
+    public void SpeakingPart1() throws IOException{
+        SPK spk = new SPK();
+        spk.setQuestionType(QuestionType.SPK_PART1);
+        spk.setImage("spk-part1.png");
+        spk.setRecording("spk_part1.mp3");
+    }
+
+    public void SpeakingPart2() throws IOException{
+        SPK spk = new SPK();
+        spk.setQuestionType(QuestionType.SPK_PART2);
+        spk.setImage("spk-part2.png");
+        spk.setRecording("spk_part2.mp3");
+    }
+
     public void createDummyUsers() {
         for (int i = 1; i <= NUMBER_OF_DUMMY_USERS; i++) {
             Member member = Member.builder()
@@ -283,6 +297,8 @@ public class DevConfiguration {
         initPart6();
         initPart7_single();
         initPart7_multiple();
+        SpeakingPart1();
+        SpeakingPart2();
     }
 
 //    @PostConstruct

@@ -260,6 +260,22 @@ public class TestConfiguration {
         return paragraph.toString();
     }
 
+    public void SpeakingPart1() throws IOException{
+        SPK spk = new SPK();
+        spk.setQuestionType(QuestionType.SPK_PART1);
+        spk.setImage("spk-part1.png");
+        spk.setRecording("spk_part1.mp3");
+        questionRepository.save(spk);
+    }
+
+    public void SpeakingPart2() throws IOException{
+        SPK spk = new SPK();
+        spk.setQuestionType(QuestionType.SPK_PART2);
+        spk.setImage("spk-part2.png");
+        spk.setRecording("spk_part2.mp3");
+        questionRepository.save(spk);
+    }
+
     /**
      * DummyUser를 여러명 생성합니다.
      */
@@ -343,6 +359,8 @@ public class TestConfiguration {
         initPart6();
         initPart7_single();
         initPart7_multiple();
+        SpeakingPart1();
+        SpeakingPart2();
     }
 
 }

@@ -1,0 +1,99 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='RC_Sheet'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/sheet/sheet.css}">
+</th:block>
+
+
+
+<div layout:fragment="content">
+    <div class="container">
+    <!--level 1 (Question1, 2)-->
+        <div class="py-5">
+            <div>
+                    <p>Directions:<br/>
+                    In this part of the test, you will read aloud the text on the screen.<br/>
+                    You will have 45 seconds to prepare.<br/>
+                    Then you will have 45 seconds to read the text aloud</p>
+            </div>
+            <div>
+                <label>
+                    여기가 토익스피킹 레벨1 text 들어갈곳
+                </label>
+            </div>
+        </div>
+        <!--level 2 (Question1)-->
+        <div class="py-5">
+            <div>
+                <p>Directions:<br/>
+                    In this part of the test, you will describe the picture on your screen in as much detail as you can.<br/>
+                    You will have 30 seconds to prepare your response.<br/>
+                    Then you will have 45 seconds to speak about the picture.</p>
+            </div>
+            <div>
+                <label>
+                    여기가 토익스피킹 레벨2 text 들어갈곳
+                </label>
+            </div>
+        </div>
+        <div>
+            <input name="speech" id=""  value="" style="width: 500px; height: 100px;" >
+                <button id="speech-btn" type="button" class="btn btn-primary">녹음</button>
+            <form th:action="@{/result}">
+                <button type="button" class="btn btn-primary">제출</button>
+            </form>
+
+            <script>
+                $(document).ready(function(){
+                    $("#speech-btn").click(function(){
+                        $.ajax({
+                            type: 'GET',
+                            url: '/speech',
+                            dataType: 'json',
+                            success: function (data) {
+                                var speech = JSON.stringify(data.result);
+                                $('input[name=speech]').attr('value', speech);
+                            },
+                            error: function(){
+                                alert("다시 시도해주시기 바랍니다.")
+                            }
+
+                        })
+                    });
+                });
+
+            </script>
+<!--            <script>-->
+<!--                var recognition = new webkitSpeechRecognition();-->
+<!--                recognition.continuous = true;-->
+<!--                //recognition.interimResults = true;-->
+<!--                function start(){-->
+<!--                    recognition.onresult = function(event) {-->
+<!--                        console.log(event);-->
+<!--                        var output = document.getElementById("output");-->
+<!--                        output.innerHTML = "";-->
+<!--                        for(var i=0; i<event.results.length; i++){-->
+<!--                            output.innerHTML = output.innerHTML + event.results[i][0].transcript;-->
+<!--                        }-->
+<!--                    }-->
+<!--                    recognition.start();-->
+<!--                }-->
+<!--            </script>-->
+
+<!--            <h1>Speech to text</h1>-->
+<!--            <input id = "bStart" type = "button" value = "Start" onclick = "recognition.start();"/>-->
+<!--            <input id = "bStop" type = "button" value = "Stop" onclick = "recognition.stop();"/>-->
+<!--            <div id = "output"></div>-->
+
+        </div>
+    </div><!--container-->
+</div>
+
+<!--<script>-->
+<!--    document.ready()-->
+
+<!--</script>-->
+</html>

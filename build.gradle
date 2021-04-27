@@ -62,6 +62,8 @@ dependencies {
 
 	compile 'com.google.cloud:google-cloud-vision'
 
+	compile 'com.google.cloud:google-cloud-speech'
+
 	implementation 'com.google.cloud.functions:functions-framework-api:1.0.1'
 
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
