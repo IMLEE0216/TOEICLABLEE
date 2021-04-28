@@ -78,6 +78,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/forum_upload",
                         "/spk_part",
                         "/speech",
+                        "/spk_select",
                         "/spk_sheet",
                         "/spk_confirm_answer",
                         "/spk_answer_sheet"

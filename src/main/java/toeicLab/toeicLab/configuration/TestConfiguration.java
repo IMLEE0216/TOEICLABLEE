@@ -274,6 +274,7 @@ public class TestConfiguration {
         spk.setImage("spk-part2.png");
         spk.setRecording("spk_part2.mp3");
         questionRepository.save(spk);
+
     }
 
     /**

@@ -5,19 +5,25 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import toeicLab.toeicLab.domain.Member;
-import toeicLab.toeicLab.service.SpeechService2;
+import toeicLab.toeicLab.domain.Question;
+import toeicLab.toeicLab.domain.QuestionType;
+import toeicLab.toeicLab.repository.QuestionRepository;
+import toeicLab.toeicLab.service.SpeechService;
 import toeicLab.toeicLab.user.CurrentUser;
+
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @Slf4j
 @RequiredArgsConstructor
 public class SpeakingController {
 
-    private final SpeechService2 speechService2;
+    private final SpeechService speechService2;
+    private final QuestionRepository questionRepository;
 
     /**
      * [ToeicLab]의 SPK문제풀이 페이지로 이동합니다.
@@ -76,19 +82,43 @@ public class SpeakingController {
         return "speaking/toeiclab_intro";
     }
 
-    @GetMapping("/spk_part")
-    public String spkPart(Member member){
 
-        return "/speaking/spk_part";
+
+
+
+    @GetMapping("/spk_select")
+    public String spkSelect(Member member, Model model){
+        model.addAttribute(member);
+        return "speaking/spk_select";
     }
 
+
+
+
+    @RequestMapping("/speech/{part}")
+    @Transactional
+    public String selectPart(Member member, @PathVariable String part, Model model){
+        model.addAttribute(member);
+        Question question = null;
+        List<Question> list;
+        if(part.equals("part1")){
+            list = new ArrayList<>(questionRepository.findAllByQuestionType(QuestionType.SPK_PART1));
+            question = list.get((int)Math.random()*list.size());
+            model.addAttribute("question", question);
+        } else if (part.equals("part2")){
+            list = new ArrayList<>(questionRepository.findAllByQuestionType(QuestionType.SPK_PART2));
+            question = list.get((int)Math.random()*list.size());
+            model.addAttribute("question", question);
+        }
+        return "speaking/spk_part";
+    }
 
     @GetMapping("/speech")
     @ResponseBody
     public String speechTest(Member member, Model model) throws Exception {
         JsonObject jsonObject = new JsonObject();
         StringBuffer sb = new StringBuffer();
-        SpeechService2.streamingMicRecognize(sb);
+        SpeechService.streamingMicRecognize(sb);
         jsonObject.addProperty("result",sb.toString());
         return jsonObject.toString();
     }

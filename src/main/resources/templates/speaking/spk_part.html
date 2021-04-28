@@ -12,7 +12,7 @@
 <div layout:fragment="content">
     <div class="container">
     <!--level 1 (Question1, 2)-->
-        <div class="py-5">
+        <div class="py-5" th:if="${question.getQuestionType().toString().equals('SPK_PART1')}">
             <div>
                     <p>Directions:<br/>
                     In this part of the test, you will read aloud the text on the screen.<br/>
@@ -20,13 +20,14 @@
                     Then you will have 45 seconds to read the text aloud</p>
             </div>
             <div>
-                <label>
-                    여기가 토익스피킹 레벨1 text 들어갈곳
-                </label>
+                <audio controls><source type="audio/mp3" th:src="@{'/audio/' + ${question.recording}}"></audio>
+            </div>
+            <div>
+                <img th:src="@{'/images/spk_images/' + ${question.image}}" class="img" >
             </div>
         </div>
-        <!--level 2 (Question1)-->
-        <div class="py-5">
+
+        <div class="py-5" th:if="${question.getQuestionType().toString().equals('SPK_PART2')}">
             <div>
                 <p>Directions:<br/>
                     In this part of the test, you will describe the picture on your screen in as much detail as you can.<br/>
@@ -34,16 +35,21 @@
                     Then you will have 45 seconds to speak about the picture.</p>
             </div>
             <div>
-                <label>
-                    여기가 토익스피킹 레벨2 text 들어갈곳
-                </label>
+                <audio controls><source type="audio/mp3" th:src="@{'/audio/' + ${question.recording}}"></audio>
+            </div>
+            <div>
+                <img th:src="@{'/images/spk_images/' + ${question.image}}" class="img" >
             </div>
         </div>
+
+        <div id="ViewTimer"></div>
         <div>
-            <input name="speech" id=""  value="" style="width: 500px; height: 100px;" >
+            <input name="speech" id="" value="" style="width: 600px; height: 100px;">
+            <textarea name="speech" id="speech-textarea" value="" style="width: 600px; height: 100px;"></textarea>
+
                 <button id="speech-btn" type="button" class="btn btn-primary">녹음</button>
             <form th:action="@{/result}">
-                <button type="button" class="btn btn-primary">제출</button>
+                <button type="submit" class="btn btn-primary">제출</button>
             </form>
 
             <script>
@@ -55,7 +61,8 @@
                             dataType: 'json',
                             success: function (data) {
                                 var speech = JSON.stringify(data.result);
-                                $('input[name=speech]').attr('value', speech);
+                                // $('input[name=speech]').attr('value', speech);
+                                document.getElementById('speech-textarea').innerHTML = speech;
                             },
                             error: function(){
                                 alert("다시 시도해주시기 바랍니다.")
@@ -66,34 +73,43 @@
                 });
 
             </script>
-<!--            <script>-->
-<!--                var recognition = new webkitSpeechRecognition();-->
-<!--                recognition.continuous = true;-->
-<!--                //recognition.interimResults = true;-->
-<!--                function start(){-->
-<!--                    recognition.onresult = function(event) {-->
-<!--                        console.log(event);-->
-<!--                        var output = document.getElementById("output");-->
-<!--                        output.innerHTML = "";-->
-<!--                        for(var i=0; i<event.results.length; i++){-->
-<!--                            output.innerHTML = output.innerHTML + event.results[i][0].transcript;-->
-<!--                        }-->
-<!--                    }-->
-<!--                    recognition.start();-->
-<!--                }-->
-<!--            </script>-->
 
-<!--            <h1>Speech to text</h1>-->
-<!--            <input id = "bStart" type = "button" value = "Start" onclick = "recognition.start();"/>-->
-<!--            <input id = "bStop" type = "button" value = "Stop" onclick = "recognition.stop();"/>-->
-<!--            <div id = "output"></div>-->
+
+            <script>
+
+                var SetTime = 10;		// 최초 설정 시간(기본 : 초)
+
+                function msg_time() {	// 1초씩 카운트
+                    // m = Math.floor(SetTime / 60) + "분 " + (SetTime % 60) + "초";
+                    m = Math.floor(SetTime % 60) + "초";	// 남은 시간 계산
+
+                    var msg = "현재 남은 시간은 <font color='red'>" + m + "</font> 입니다.";
+
+                    document.all.ViewTimer.innerHTML = msg;		// div 영역에 보여줌
+
+                    SetTime--;					// 1초씩 감소
+
+                    if (SetTime < 0) {			// 시간이 종료 되었으면..
+
+                        clearInterval(tid);		// 타이머 해제
+                        alert("종료");
+                    }
+
+                }
+                $(document).ready(function(){
+                    $("#speech-btn").click(function (){
+                        TimerStart();
+                    });
+                });
+
+                function TimerStart(){
+                    tid=setInterval('msg_time()',1000)
+                }
+
+            </script>
 
         </div>
     </div><!--container-->
 </div>
 
-<!--<script>-->
-<!--    document.ready()-->
-
-<!--</script>-->
 </html>

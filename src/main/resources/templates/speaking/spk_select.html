@@ -1,0 +1,23 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Select_SPK'">
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/sheet/sheet.css}">
+</th:block>
+
+<div layout:fragment="content">
+    <div class="container">
+        <div class="py-5" style="text-align: center">
+          <label>PART 1 연습문제</label><button type="button" class="btn" id="spk_part1"><a th:href="@{/speech/{part}(part=${'part1'})}">시작하기</a></button><br/>
+          <label>PART 2 연습문제</label><button type="button" class="btn" id="spk_part2"><a th:href="@{/speech/{part}(part=${'part2'})}">시작하기</a></button><br/>
+          <label>PART 3 연습문제</label><span>문제 준비중 입니다.</span><br/>
+          <label>PART 4 연습문제</label><span>문제 준비중 입니다.</span><br/>
+          <label>PART 5 연습문제</label><span>문제 준비중 입니다.</span><br/>
+          <label>PART 6 연습문제</label><span>문제 준비중 입니다.</span><br/>
+        </div>
+    </div>
+
+</div>
+</html>
