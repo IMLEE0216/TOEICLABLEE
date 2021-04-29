@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.*;
 import toeicLab.toeicLab.domain.Member;
 import toeicLab.toeicLab.domain.Question;
 import toeicLab.toeicLab.domain.QuestionType;
+import toeicLab.toeicLab.domain.SPK;
 import toeicLab.toeicLab.repository.QuestionRepository;
+import toeicLab.toeicLab.repository.SPKRepository;
 import toeicLab.toeicLab.service.SpeechService;
 import toeicLab.toeicLab.user.CurrentUser;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -24,6 +27,7 @@ public class SpeakingController {
 
     private final SpeechService speechService2;
     private final QuestionRepository questionRepository;
+    private final SPKRepository spkRepository;
 
     /**
      * [ToeicLab]의 SPK문제풀이 페이지로 이동합니다.
@@ -34,7 +38,7 @@ public class SpeakingController {
     @GetMapping("/spk_sheet")
     public String spkSheet(@CurrentUser Member member, Model model) {
         model.addAttribute("member", member);
-        return "speaking/spk_sheet";
+        return "spk_sheet_un";
     }
 
     /**
@@ -46,7 +50,7 @@ public class SpeakingController {
     @GetMapping("/spk_confirm_answer")
     public String spkConfirmAnswer(@CurrentUser Member member, Model model) {
         model.addAttribute("member", member);
-        return "speaking/spk_confirm_answer";
+        return "un_spk_confirm_answer";
     }
 
     /**
@@ -70,7 +74,7 @@ public class SpeakingController {
     @GetMapping("/schedule")
     public String schedule(@CurrentUser Member member, Model model) {
         model.addAttribute("member", member);
-        return "speaking/schedule";
+        return "un_schedule";
     }
 
     /**
@@ -123,9 +127,53 @@ public class SpeakingController {
         return jsonObject.toString();
     }
 
-    @PostMapping("/result")
-    public String resultSpeaking(Member member) {
+    @PostMapping("/speech_result")
+    public String resultSpeaking(Member member, @RequestParam("id") long id, @RequestParam("speech") String speech, Model model) {
+        SPK spk = spkRepository.getOne(id);
+        String strSpeech = speech.replaceAll("\"", "");
+        String [] arrSpeech = strSpeech.split(" ");
+        int count = 0;
+        double avg = 0;
+        if (spk.getQuestionType().equals(QuestionType.SPK_PART1)){
+            String str = spk.getContent();
+            String [] arr = str.split(" ");
+            List<String> strContent = new ArrayList<>();
+            for (String value : arr) {
+                if (!strContent.contains(value)) {
+                    strContent.add(value);
+                }
+            }
+            for (int i =0; i < strContent.size(); ++i){
+                for (String s : arrSpeech) {
+                    if (strContent.get(i).equals(s)) {
+                        ++count;
+                    }
+                }
+            }
+//            avg = (count/arr.length)*100;
+            System.out.println(count);
+        }
 
-        return "redirect:/";
+        else if (spk.getQuestionType().equals(QuestionType.SPK_PART2)){
+            List<String> str = new ArrayList<>(spk.getKeyword());
+            System.out.println(Arrays.toString(arrSpeech));
+
+            for (int j =0; j < arrSpeech.length; ++j) {
+                for (int i = 0; i < str.size(); ++i) {
+                    if (arrSpeech[j].equals(str.get(i))) {
+                        ++count;
+                    }
+                }
+            }
+//            avg = (count/ str.size())*100;
+            System.out.println(count);
+        }
+
+
+        model.addAttribute("average", avg);
+        model.addAttribute("myAnswer", speech);
+        model.addAttribute("question", spk);
+        model.addAttribute(member);
+        return "speaking/spk_answer_sheet";
     }
 }

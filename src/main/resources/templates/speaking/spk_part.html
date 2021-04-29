@@ -6,7 +6,9 @@
 <th:block layout:fragment="css">
     <link rel="stylesheet" th:href="@{/css/sheet/sheet.css}">
 </th:block>
-
+<th:block layout:fragment="js">
+    <script type="text/javascript" th:src="@{/js/speaking/speech.js}"></script>
+</th:block>
 
 
 <div layout:fragment="content">
@@ -26,7 +28,7 @@
                 <img th:src="@{'/images/spk_images/' + ${question.image}}" class="img" >
             </div>
         </div>
-
+        <!--level 2 (Question3)-->
         <div class="py-5" th:if="${question.getQuestionType().toString().equals('SPK_PART2')}">
             <div>
                 <p>Directions:<br/>
@@ -43,71 +45,15 @@
         </div>
 
         <div id="ViewTimer"></div>
+        <button id="speech-btn" type="button" class="btn btn-primary">녹음</button>
         <div>
-            <input name="speech" id="" value="" style="width: 600px; height: 100px;">
-            <textarea name="speech" id="speech-textarea" value="" style="width: 600px; height: 100px;"></textarea>
-
-                <button id="speech-btn" type="button" class="btn btn-primary">녹음</button>
-            <form th:action="@{/result}">
+            <form th:action="@{/speech_result}" method="post">
+                <input type="hidden" name="id" th:value="${question.id}" id="question-id">
+                <!--<input name="speech" id="" value="" style="width: 600px; height: 100px;">-->
+                <!--<textarea name="speech" id="speech-textarea" value="" style="width: 600px; height: 100px;"></textarea>-->
+                <textarea name="speech" id="speech-textarea" style="width: 600px; height: 100px;"></textarea>
                 <button type="submit" class="btn btn-primary">제출</button>
             </form>
-
-            <script>
-                $(document).ready(function(){
-                    $("#speech-btn").click(function(){
-                        $.ajax({
-                            type: 'GET',
-                            url: '/speech',
-                            dataType: 'json',
-                            success: function (data) {
-                                var speech = JSON.stringify(data.result);
-                                // $('input[name=speech]').attr('value', speech);
-                                document.getElementById('speech-textarea').innerHTML = speech;
-                            },
-                            error: function(){
-                                alert("다시 시도해주시기 바랍니다.")
-                            }
-
-                        })
-                    });
-                });
-
-            </script>
-
-
-            <script>
-
-                var SetTime = 10;		// 최초 설정 시간(기본 : 초)
-
-                function msg_time() {	// 1초씩 카운트
-                    // m = Math.floor(SetTime / 60) + "분 " + (SetTime % 60) + "초";
-                    m = Math.floor(SetTime % 60) + "초";	// 남은 시간 계산
-
-                    var msg = "현재 남은 시간은 <font color='red'>" + m + "</font> 입니다.";
-
-                    document.all.ViewTimer.innerHTML = msg;		// div 영역에 보여줌
-
-                    SetTime--;					// 1초씩 감소
-
-                    if (SetTime < 0) {			// 시간이 종료 되었으면..
-
-                        clearInterval(tid);		// 타이머 해제
-                        alert("종료");
-                    }
-
-                }
-                $(document).ready(function(){
-                    $("#speech-btn").click(function (){
-                        TimerStart();
-                    });
-                });
-
-                function TimerStart(){
-                    tid=setInterval('msg_time()',1000)
-                }
-
-            </script>
-
         </div>
     </div><!--container-->
 </div>

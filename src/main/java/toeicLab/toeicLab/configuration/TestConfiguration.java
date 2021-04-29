@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import toeicLab.toeicLab.domain.*;
 import toeicLab.toeicLab.repository.MemberRepository;
 import toeicLab.toeicLab.repository.QuestionRepository;
+import toeicLab.toeicLab.repository.SPKRepository;
 import toeicLab.toeicLab.repository.StudyGroupApplicationRepository;
 import toeicLab.toeicLab.service.StudyGroupApplicationService;
 
@@ -17,6 +18,7 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +28,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class TestConfiguration {
 
+    private final SPKRepository spkRepository;
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
     private final QuestionRepository questionRepository;
@@ -265,6 +268,11 @@ public class TestConfiguration {
         spk.setQuestionType(QuestionType.SPK_PART1);
         spk.setImage("spk-part1.png");
         spk.setRecording("spk_part1.mp3");
+        spk.setContent("Many people believe that learning a language is a one-step process. " +
+                "However, this is not true. Because there are many different aspects of a language, there are many different learning methods. " +
+                "Perhaps, the first and most basic step is learning vocabulary." +
+                "After learning vocabulary, one must learn grammar rules. " +
+                "Once one has a basic grasp of both of these, one can then begin to practice speaking and reading in the new language.");
         questionRepository.save(spk);
     }
 
@@ -273,6 +281,17 @@ public class TestConfiguration {
         spk.setQuestionType(QuestionType.SPK_PART2);
         spk.setImage("spk-part2.png");
         spk.setRecording("spk_part2.mp3");
+        List<String> key = new ArrayList<>();
+        key.add("holds");
+        key.add("holding");
+        key.add("wears");
+        key.add("refuels");
+        key.add("fills");
+        key.add("gas");
+        key.add("brown");
+        key.add("gun");
+        key.add("station");
+        spk.setKeyword(key);
         questionRepository.save(spk);
 
     }

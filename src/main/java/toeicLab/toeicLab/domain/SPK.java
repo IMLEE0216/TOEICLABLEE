@@ -12,6 +12,9 @@ public class SPK extends Question{
 
     private String recording;
 
+    @Column(columnDefinition = "TEXT")
+    private String content;
+
     @ElementCollection
     private List<String> keyword = new ArrayList<>();
 }
