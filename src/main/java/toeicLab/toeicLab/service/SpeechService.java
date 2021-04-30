@@ -15,7 +15,12 @@ import java.util.ArrayList;
 @Service
 @RequiredArgsConstructor
 public class SpeechService {
-    /** Performs microphone streaming speech recognition with a duration of 1 minute. */
+    /**
+     * 사용자의 녹음을 실시간으로 입력받아 sb로 추출한다.
+     * Performs microphone streaming speech recognition with a duration of 1 minute.
+     * @param sb 녹음 결과 값을 받을 StringBuffer
+     * @throws Exception
+     */
     public static void streamingMicRecognize(StringBuffer sb) throws Exception {
 
         ResponseObserver<StreamingRecognizeResponse> responseObserver = null;

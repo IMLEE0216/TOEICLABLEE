@@ -111,7 +111,8 @@ public class MyFunctionController {
             String loweredWord = word.toLowerCase();
             String url = "https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=" + loweredWord + "뜻";
             Document document = Jsoup.connect(url).get();
-            Elements element = document.getElementsByAttributeValue("class", "mean api_txt_lines");
+//            Elements element = document.getElementsByAttributeValue("class", "mean api_txt_lines");
+            Elements element = document.getElementsByAttributeValue("class", "mean");
             String cut = element.get(0).text();
             result = cut;
 
@@ -120,7 +121,8 @@ public class MyFunctionController {
         } else {
             String url = "https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=" + word + "영어로";
             Document document = Jsoup.connect(url).get();
-            Elements element = document.getElementsByAttributeValue("class", "mean api_txt_lines");
+//            Elements element = document.getElementsByAttributeValue("class", "mean api_txt_lines");
+            Elements element = document.getElementsByAttributeValue("class", "mean");
             String cut = element.get(0).text();
             result = cut;
 
