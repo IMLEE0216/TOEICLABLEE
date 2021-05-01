@@ -270,7 +270,7 @@ public class TestConfiguration {
         spk.setRecording("spk_part1.mp3");
         spk.setContent("Many people believe that learning a language is a one-step process. " +
                 "However, this is not true. Because there are many different aspects of a language, there are many different learning methods. " +
-                "Perhaps, the first and most basic step is learning vocabulary." +
+                "Perhaps, the first and most basic step is learning vocabulary. " +
                 "After learning vocabulary, one must learn grammar rules. " +
                 "Once one has a basic grasp of both of these, one can then begin to practice speaking and reading in the new language.");
         questionRepository.save(spk);

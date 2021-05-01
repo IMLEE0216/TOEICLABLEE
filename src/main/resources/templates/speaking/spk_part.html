@@ -4,7 +4,7 @@
       layout:decorate="layout" th:with="title='SPK_Question'">
 
 <th:block layout:fragment="css">
-    <link rel="stylesheet" th:href="@{/css/sheet/sheet.css}">
+    <link rel="stylesheet" th:href="@{/css/speaking/spk.css}">
 </th:block>
 <th:block layout:fragment="js">
     <script type="text/javascript" th:src="@{/js/speaking/speech.js}"></script>
@@ -16,7 +16,7 @@
     <!--level 1 (Question1, 2)-->
         <div class="py-5" th:if="${question.getQuestionType().toString().equals('SPK_PART1')}">
             <div>
-                    <p>Directions:<br/>
+                    <p>DIRECTION<br/>
                     In this part of the test, you will read aloud the text on the screen.<br/>
                     You will have 45 seconds to prepare.<br/>
                     Then you will have 45 seconds to read the text aloud</p>
@@ -45,14 +45,20 @@
         </div>
 
         <div id="ViewTimer"></div>
-        <button id="speech-btn" type="button" class="btn btn-primary">녹음</button>
+        <div id="speech-btn-div">
+            <button id="speech-btn" type="button" class="btn btn-dark">녹음</button>
+        </div>
         <div>
-            <form th:action="@{/speech_result}" method="post">
+            <form th:action="@{/speech_result}" method="post" id="speech-form">
                 <input type="hidden" name="id" th:value="${question.id}" id="question-id">
                 <!--<input name="speech" id="" value="" style="width: 600px; height: 100px;">-->
                 <!--<textarea name="speech" id="speech-textarea" value="" style="width: 600px; height: 100px;"></textarea>-->
-                <textarea name="speech" id="speech-textarea" style="width: 600px; height: 100px;"></textarea>
-                <button type="submit" class="btn btn-primary">제출</button>
+                <div id="speech-textarea-div">
+                    <textarea name="speech" id="speech-textarea"></textarea>
+                </div>
+                <div id="submit-btn">
+                    <button type="submit" class="btn btn-primary" >제출</button>
+                </div>
             </form>
         </div>
     </div><!--container-->

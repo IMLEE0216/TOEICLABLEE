@@ -93,7 +93,7 @@ public class SpeechService {
                 long estimatedTime = System.currentTimeMillis() - startTime;
                 byte[] data = new byte[6400];
                 audio.read(data);
-                if (estimatedTime > 10000) { // 60 seconds
+                if (estimatedTime > 45000) { // 60 seconds
                     System.out.println("Stop speaking.");
                     targetDataLine.stop();
                     targetDataLine.close();

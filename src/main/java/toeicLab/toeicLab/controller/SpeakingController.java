@@ -18,6 +18,7 @@ import toeicLab.toeicLab.user.CurrentUser;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -75,16 +76,32 @@ public class SpeakingController {
         double size = 0;
         double avg;
         if (spk.getQuestionType().equals(QuestionType.SPK_PART1)){
-            String str = spk.getContent().replaceAll("\\.", "").toLowerCase(Locale.ROOT);
+            String str = spk.getContent().replaceAll("\\.", "").replaceAll(",", "").toLowerCase(Locale.ROOT);
             List<String> strContent = new ArrayList<>();
             String [] arr = str.split(" ");
-            speakingService.speechPart1(arrSpeech, userContent, count, strContent, arr);
+            speakingService.speechPart1(arrSpeech, userContent, strContent, arr);
+            for (int i = 0; i < strContent.size(); ++i){
+                for (String s : userContent) {
+                    if (strContent.get(i).equals(s)) {
+                        count += 1;
+                    }
+                }
+            }
             size = arr.length;
+
         } else if (spk.getQuestionType().equals(QuestionType.SPK_PART2)){
             List<String> str = new ArrayList<>(spk.getKeyword());
-            speakingService.speechPart2(arrSpeech, userContent, count, str);
+            speakingService.speechPart2(arrSpeech, userContent, str);
+            for (int j = 0; j < userContent.size(); ++j) {
+                for (int i = 0; i < str.size(); ++i) {
+                    if (userContent.get(j).equals(str.get(i))) {
+                        count += 1;
+                    }
+                }
+            }
             size = str.size();
         }
+
         avg = (count/size)*100;
         String result = String.format("%.2f", avg) + "%";
         model.addAttribute("average", result);

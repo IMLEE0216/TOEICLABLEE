@@ -1,0 +1,85 @@
+.py-5 {
+    text-align: center;
+}
+
+label {
+    font-family: "Hi Melody", sans-serif;
+    font-size: 1.75rem;
+}
+
+.content-span {
+    font-family: "Gugi", sans-serif;
+    font-size: 1rem;
+
+}
+
+.btn-dark {
+    font-family: "Gugi", sans-serif;
+}
+
+#speech-btn-div{
+    text-align: center;
+    padding: 0.625em;
+}
+
+#speech-btn {
+    width: 15.625em;
+}
+
+#speech-form {
+    text-align: center;
+    padding-right: 10.000em;
+    padding-left: 10.000em;
+    padding-bottom: 3.125em;
+}
+
+#speech-textarea {
+    width: 100%;
+    height: 12.500em;
+}
+
+.text-area {
+    width: 37.500em;
+    height: 12.500em;
+}
+
+#submit-btn {
+    text-align: end;
+    font-family: "Gugi", sans-serif;
+}
+
+#speech-textarea-div {
+    padding-bottom: 1.250em;
+}
+#ViewTimer {
+    text-align: center;
+}
+
+.basic {
+    font-size: 1.563rem;
+    font-family: "Gugi", sans-serif;
+}
+
+.content-div {
+    padding-bottom: 1.250em;
+}
+
+.result-div {
+    font-family: "Gugi", sans-serif;
+    font-size: 1.25rem;
+}
+
+#home-div {
+    text-align: center;
+    font-family: "Gugi", sans-serif;
+    padding-bottom: 1.250em;
+}
+
+#home-btn {
+    width: 12.500em;
+}
+
+.img {
+    width: 44.125em;
+    height: 18.25em;
+}

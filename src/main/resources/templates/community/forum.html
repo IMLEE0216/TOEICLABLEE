@@ -1,6 +1,7 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="layout" th:with="title='Forum'">
 
 <th:block layout:fragment="css">
@@ -14,7 +15,7 @@
                 <h5>새로운 문제를 등록하여 저희 커뮤니티를 발전 시키세요!</h5>
             </div>
             <div id="upload-btn">
-                <button class="btn"><a th:href="@{/forum_upload}" class="btn btn-dark">문제사진 올리기</a></button>
+                <button class="btn" sec:authorize="isAuthenticated()"><a th:href="@{/forum_upload}" class="btn btn-dark">문제사진 올리기</a></button>
             </div>
             <table class="table table-striped">
                 <thead>

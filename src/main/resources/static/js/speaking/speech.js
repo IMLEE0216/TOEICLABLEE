@@ -1,4 +1,4 @@
-    var SetTime = 10;		// 최초 설정 시간(기본 : 초)
+    var SetTime = 45;		// 최초 설정 시간(기본 : 초)
 
 function msg_time() {	// 1초씩 카운트
     // m = Math.floor(SetTime / 60) + "분 " + (SetTime % 60) + "초";

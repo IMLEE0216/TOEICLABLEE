@@ -282,7 +282,7 @@ public class CommunityController {
      * @return community/forum
      */
     @GetMapping("/forum")
-    public String forum(@CurrentUser Member member, Model model, @RequestParam(defaultValue = "1") int page) {
+    public String forum(Member member, Model model, @RequestParam(defaultValue = "1") int page) {
         List<Forum> forumList = forumRepository.findAll();
 
         int size = forumList.size();

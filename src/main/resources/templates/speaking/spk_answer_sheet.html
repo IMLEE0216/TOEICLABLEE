@@ -5,7 +5,7 @@
       layout:decorate="layout" th:with="title='SPK_Answer'">
 
 <th:block layout:fragment="css">
-    <link rel="stylesheet" th:href="@{/css/select/select.css}">
+    <link rel="stylesheet" th:href="@{/css/speaking/spk.css}">
 </th:block>
 
 
@@ -13,33 +13,33 @@
         <div class="container">
             <!--level 1 (Question1, 2)-->
             <div class="py-5" th:if="${question.getQuestionType().toString().equals('SPK_PART1')}">
-                <div><!--question content-->
-                    <p>문제의 내용</p>
-                    <textarea th:text="${question.content}" cols="30" rows="10"></textarea>
+                <div class="content-div"><!--question content-->
+                    <p class="basic">문제의 내용</p>
+                    <textarea th:text="${question.content}" class="text-area"></textarea>
                 </div>
-                <div><!--user content-->
-                    <p th:text="${member.nickname} + '님의 내용'"></p>
-                    <textarea th:text="${myAnswer}" cols="30" rows="10"></textarea>
+                <div class="content-div"><!--user content-->
+                    <p class="basic" th:text="${member.nickname} + '님의 내용'"></p>
+                    <textarea th:text="${myAnswer}" class="text-area"></textarea>
                 </div>
-                <div><!--result-->
+                <div class="result-div"><!--result-->
                     <p>문제의 내용과의 일치율은 <b th:text="${average}"></b> 입니다.</p>
                 </div>
             </div>
             <!--level 2 (Question3)-->
             <div class="py-5" th:if="${question.getQuestionType().toString().equals('SPK_PART2')}">
-                <div><!--question keyword-->
-                    <p>문제의 내용</p>
+                <div class="content-div"><!--question keyword-->
+                    <p class="basic">문제의 내용</p>
                     <span th:each="list:${question.getKeyword()}"><span th:text="${list} + ' '"></span></span>
                 </div>
-                <div><!--user content-->
-                    <p th:text="${member.nickname} + '님의 내용'"></p>
-                    <textarea th:text="${myAnswer}" cols="30" rows="10"></textarea>
+                <div class="content-div"><!--user content-->
+                    <p class="basic" th:text="${member.nickname} + '님의 내용'"></p>
+                    <textarea th:text="${myAnswer}" class="text-area"></textarea>
                 </div>
-                <div><!--result-->
+                <div class="result-div"><!--result-->
                     <p>문제의 키워드와의 일치율은 <b th:text="${average}"></b>입니다.</p>
                 </div>
             </div>
-            <div><button>홈으로</button></div>
+            <div id="home-div"><button class="btn btn-dark" id="home-btn" th:onclick="|location.href='@{/}'|">홈으로</button></div>
         </div>
     </div>
 </html>
