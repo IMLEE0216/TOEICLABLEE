@@ -128,14 +128,14 @@
 
 5. 개선해야 할 점
    - 연락처를 통한 인증 기능
-     - 백엔드 리팩터링 
-     - 단어시험 기능 구현 (정답 인식 알고리즘)
+   - 스피킹 문제 추가
+   - 백엔드 리팩터링 
+
    
-   
-   
+
 6. ERD
 
-![TOEIC ERD](C:\Users\Lee\Desktop\privatelee\TOEIC\TOEIC ERD.jpeg)
+![TOEIC ERD](https://user-images.githubusercontent.com/73643473/116818438-483fe580-aba6-11eb-814c-bd724e9c3a69.jpeg)
 
 동영상
 
