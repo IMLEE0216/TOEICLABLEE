@@ -130,8 +130,12 @@
    - 연락처를 통한 인증 기능
      - 백엔드 리팩터링 
      - 단어시험 기능 구현 (정답 인식 알고리즘)
+   
+   
+   
+6. ERD
 
-
+![TOEIC ERD](C:\Users\Lee\Desktop\privatelee\TOEIC\TOEIC ERD.jpeg)
 
 동영상
 

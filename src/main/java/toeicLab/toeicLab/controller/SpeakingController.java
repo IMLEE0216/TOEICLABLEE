@@ -18,7 +18,6 @@ import toeicLab.toeicLab.user.CurrentUser;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -31,12 +30,25 @@ public class SpeakingController {
     private final SPKRepository spkRepository;
     private final SpeakingService speakingService;
 
+    /**
+     * 스피킹 파트 선택지로 이동합니다.
+     * @param member
+     * @param model
+     * @return speaking/spk_select
+     */
     @GetMapping("/spk_select")
     public String spkSelect(Member member, Model model){
         model.addAttribute(member);
         return "speaking/spk_select";
     }
-    
+
+    /**
+     * 스피킹 선택지에서 파트 선택시 파트에 맞는 문제를 랜덤으로 사용자에게 보져줍니다.
+     * @param member
+     * @param part 사용자가 선택한 파트입니다.
+     * @param model
+     * @return speaking/spk_part
+     */
     @RequestMapping("/speech/{part}")
     @Transactional
     public String selectPart(Member member, @PathVariable String part, Model model){
@@ -55,6 +67,13 @@ public class SpeakingController {
         return "speaking/spk_part";
     }
 
+    /**
+     * 사용자가 실시간 녹음을 할 수 있는 메소드입니다.
+     * @param member
+     * @param model
+     * @return jsonObject
+     * @throws Exception
+     */
     @GetMapping("/speech")
     @ResponseBody
     public String speechTest(Member member, Model model) throws Exception {
@@ -65,6 +84,14 @@ public class SpeakingController {
         return jsonObject.toString();
     }
 
+    /**
+     * 사용자가 실시간으로 말한 내용을 가져와 판별 후 일치율을 보여줍니다.
+     * @param member
+     * @param id 문제의 번호
+     * @param speech 사용자가 실시간으로 말한 내용입니다.
+     * @param model
+     * @return speaking/spk_answer_sheet
+     */
     @PostMapping("/speech_result")
     public String resultSpeaking(@CurrentUser Member member, @RequestParam("id") long id, @RequestParam("speech") String speech, Model model) {
         SPK spk = spkRepository.getOne(id);
@@ -91,7 +118,7 @@ public class SpeakingController {
 
         } else if (spk.getQuestionType().equals(QuestionType.SPK_PART2)){
             List<String> str = new ArrayList<>(spk.getKeyword());
-            speakingService.speechPart2(arrSpeech, userContent, str);
+            speakingService.speechPart2(arrSpeech, userContent);
             for (int j = 0; j < userContent.size(); ++j) {
                 for (int i = 0; i < str.size(); ++i) {
                     if (userContent.get(j).equals(str.get(i))) {
