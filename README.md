@@ -137,9 +137,9 @@
 
 ![TOEIC ERD](https://user-images.githubusercontent.com/73643473/116818438-483fe580-aba6-11eb-814c-bd724e9c3a69.jpeg)
 
-동영상
+​																						동영상
 
-
-<div>
-	<a href="https://www.youtube.com/watch?v=IpWaK4cykKY" target="_blank"><image src = "https://img.youtube.com/vi/IpWaK4cykKY/mqdefault.jpg"></a>	
+<div style="text-align: center">
+	<a href="https://www.youtube.com/watch?v=t2VPNYM-lMQ" target="_blank"><image src = "https://img.youtube.com/vi/t2VPNYM-lMQ/mqdefault.jpg"></a>	
 </div>
+
